@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- RS1001 - Thread.Sleep em método async -->
+  <data name="RS1001_Title" xml:space="preserve">
+    <value>Thread.Sleep detectado dentro de método async</value>
+  </data>
+  <data name="RS1001_MessageFormat" xml:space="preserve">
+    <value>Peraí! Thread.Sleep() está travando uma thread de verdade dentro de um método async. Sob carga, isso satura o thread pool. Troca por 'await Task.Delay()' — sua aplicação agradece.</value>
+  </data>
+  <data name="RS1001_Description" xml:space="preserve">
+    <value>Thread.Sleep bloqueia completamente a thread chamante, impedindo que ela faça qualquer outro trabalho. Dentro de um método async, isso anula o propósito do async/await e pode saturar o thread pool sob alta carga. Substitua por 'await Task.Delay()' para manter sua aplicação saudável e escalável.</value>
+  </data>
+
+  <!-- RS1002 - Task.WhenAll sem limite explicito -->
+  <data name="RS1002_Title" xml:space="preserve">
+    <value>Fan-out no Task.WhenAll pode estar sem limite</value>
+  </data>
+  <data name="RS1002_MessageFormat" xml:space="preserve">
+    <value>Atenção! Task.WhenAll está processando uma projeção com Select() sem limite explícito. Com muita entrada, isso pode sobrecarregar dependências. Considere limitar a concorrência (exemplo: Take(...), processamento em lotes ou SemaphoreSlim).</value>
+  </data>
+  <data name="RS1002_Description" xml:space="preserve">
+    <value>Usar Task.WhenAll sobre um Select sem limite pode disparar operações concorrentes demais ao mesmo tempo, gerando pressão em conexões, timeouts ou falhas em cascata. Adicione um limite explícito de concorrência antes do fan-out.</value>
+  </data>
+
+  <!-- RS1003 - Parallel.ForEach sem MaxDegreeOfParallelism -->
+  <data name="RS1003_Title" xml:space="preserve">
+    <value>Parallel.ForEach pode estar sem limite explícito de concorrência</value>
+  </data>
+  <data name="RS1003_MessageFormat" xml:space="preserve">
+    <value>Cuidado! Parallel.ForEach está rodando sem ParallelOptions/MaxDegreeOfParallelism. Em recursos compartilhados, isso pode gerar picos de saturação. Considere definir um limite explícito.</value>
+  </data>
+  <data name="RS1003_Description" xml:space="preserve">
+    <value>Usar Parallel.ForEach sem MaxDegreeOfParallelism explícito pode sobrecarregar CPU, pools de conexão ou serviços downstream. Defina um grau máximo para manter a carga previsível.</value>
+  </data>
+
+  <!-- RS1004 - Bloqueio com Task.Wait / Task.Result -->
+  <data name="RS1004_Title" xml:space="preserve">
+    <value>Fluxo async bloqueado com Task.Wait/Result</value>
+  </data>
+  <data name="RS1004_MessageFormat" xml:space="preserve">
+    <value>Opa! Bloquear Task com .Wait() ou .Result pode saturar threads e aumentar risco de deadlock. Prefira 'await' para manter o fluxo async saudável.</value>
+  </data>
+  <data name="RS1004_Description" xml:space="preserve">
+    <value>Chamar Task.Wait() ou acessar Task.Result bloqueia a thread atual. Em fluxos com muito async, isso pode reduzir throughput e aumentar risco de deadlock/starvation. Prefira fluxo baseado em await.</value>
+  </data>
+
+  <!-- RS1005 - Materializacao prematura com ToList -->
+  <data name="RS1005_Title" xml:space="preserve">
+    <value>ToList() pode causar materialização pesada</value>
+  </data>
+  <data name="RS1005_MessageFormat" xml:space="preserve">
+    <value>Atenção! Este pipeline LINQ está sendo materializado com ToList() sem um limite explícito com Take(...). Em conjuntos grandes, isso pode aumentar a pressão de memória.</value>
+  </data>
+  <data name="RS1005_Description" xml:space="preserve">
+    <value>Materializar um pipeline LINQ com ToList() cedo demais ou sem limites pode alocar coleções grandes e aumentar pressão de GC. Considere adicionar limite ou estratégia de processamento em fluxo quando possível.</value>
+  </data>
+
+  <!-- RS1006 - Instanciacao de HttpClient por requisicao -->
+  <data name="RS1006_Title" xml:space="preserve">
+    <value>HttpClient instanciado dentro de escopo de metodo</value>
+  </data>
+  <data name="RS1006_MessageFormat" xml:space="preserve">
+    <value>Atenção! Criar HttpClient dentro de método pode levar a exaustão de sockets e comunicação mais lenta sob carga. Prefira IHttpClientFactory ou instância reutilizada.</value>
+  </data>
+  <data name="RS1006_Description" xml:space="preserve">
+    <value>Instanciar HttpClient por operação pode gerar excesso de churn de sockets e pressão de conexão. Reutilizar HttpClient ou usar IHttpClientFactory melhora reuso de conexão e estabilidade de comunicação.</value>
+  </data>
+
+  <!-- RS1007 - Chamada HTTP sem politica explicita de timeout -->
+  <data name="RS1007_Title" xml:space="preserve">
+    <value>Chamada HTTP sem politica explicita de timeout</value>
+  </data>
+  <data name="RS1007_MessageFormat" xml:space="preserve">
+    <value>Atenção! Esta chamada HttpClient não define timeout explícito (propriedade Timeout ou CancellationToken). Em picos de latência, a requisição pode ficar presa por mais tempo que o esperado.</value>
+  </data>
+  <data name="RS1007_Description" xml:space="preserve">
+    <value>Comunicação HTTP deve definir limites explícitos de timeout para evitar chamadas presas e latência em cascata. Configure HttpClient.Timeout ou passe um CancellationToken com controle de tempo.</value>
+  </data>
+
+  <!-- RS1008 - Loop de retry sem limite maximo -->
+  <data name="RS1008_Title" xml:space="preserve">
+    <value>Loop de retry sem limite explicito de tentativas</value>
+  </data>
+  <data name="RS1008_MessageFormat" xml:space="preserve">
+    <value>Cuidado! Este loop de retry parece ilimitado (condição infinita sem saída explícita). Em falha persistente, isso pode amplificar carga e latência.</value>
+  </data>
+  <data name="RS1008_Description" xml:space="preserve">
+    <value>Retries sem limite podem criar ciclos de realimentação contra dependências instáveis. Defina um número máximo explícito de tentativas e faça fail fast com observabilidade.</value>
+  </data>
+
+  <!-- RS1009 - Retry sem backoff exponencial -->
+  <data name="RS1009_Title" xml:space="preserve">
+    <value>Politica de retry sem backoff exponencial</value>
+  </data>
+  <data name="RS1009_MessageFormat" xml:space="preserve">
+    <value>Atenção! O retry no fluxo HTTP parece usar atraso fixo. Sem backoff exponencial, falhas repetidas podem amplificar a pressão sobre dependências instáveis.</value>
+  </data>
+  <data name="RS1009_Description" xml:space="preserve">
+    <value>Usar atraso fixo em retries pode manter carga alta sobre uma dependência falhando. Prefira backoff exponencial (idealmente com jitter) para suavizar o tráfego de tentativas.</value>
+  </data>
+
+  <!-- RS1010 - Retry sem jitter -->
+  <data name="RS1010_Title" xml:space="preserve">
+    <value>Politica de retry sem jitter</value>
+  </data>
+  <data name="RS1010_MessageFormat" xml:space="preserve">
+    <value>Atenção! O retry parece exponencial, mas sem jitter. Vários clientes podem retentar em sincronia e gerar picos de tráfego.</value>
+  </data>
+  <data name="RS1010_Description" xml:space="preserve">
+    <value>Backoff exponencial sem jitter pode sincronizar retries entre instâncias, gerando pressão em rajadas sobre serviços instáveis. Adicione jitter aleatório para distribuir as tentativas.</value>
+  </data>
+
+</root>

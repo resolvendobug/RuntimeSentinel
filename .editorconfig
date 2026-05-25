@@ -1,0 +1,9 @@
+root = true
+
+[*.cs]
+# RuntimeSentinel custom thresholds
+# RS1002: max accepted Take(...) before warning on Task.WhenAll fan-out.
+runtimesentinel_rs1002_max_fanout = 100
+
+# RS1005: max accepted Take(...) before warning on ToList materialization.
+runtimesentinel_rs1005_max_materialization = 200

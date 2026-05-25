@@ -1,0 +1,50 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    <IsPackable>true</IsPackable>
+    <PackageId>RuntimeSentinel.Analyzers</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>RuntimeSentinel contributors</Authors>
+    <Description>Roslyn analyzers focused on operational stability, concurrency safety, async correctness, memory pressure, and resilient HTTP communication patterns.</Description>
+    <PackageTags>roslyn;analyzer;dotnet;concurrency;async;resilience;http;performance;runtime</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
+  </ItemGroup>
+
+  <!-- Vincula o Designer.cs ao Resources.resx para organização no editor -->
+  <ItemGroup>
+    <Compile Update="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <!-- Resources.pt-BR.resx gera satellite assembly pt-BR/ no build -->
+  <ItemGroup>
+    <EmbeddedResource Update="Resources.resx">
+      <ManifestResourceName>RuntimeSentinel.Analyzers.Resources</ManifestResourceName>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources.pt-BR.resx">
+      <Culture>pt-BR</Culture>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,19 @@
+# Build outputs
+bin/
+obj/
+
+# IDE/editor
+.vscode/
+.idea/
+*.user
+*.suo
+
+# Local/private planning files (do not publish)
+RuntimeSentinel-Roadmap.md
+.private-docs/
+
+# Sample app (not published to repository)
+samples/
+
+# OS
+.DS_Store

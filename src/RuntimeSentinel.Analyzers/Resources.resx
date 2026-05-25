@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- RS1001 - Thread.Sleep in async method -->
+  <data name="RS1001_Title" xml:space="preserve">
+    <value>Thread.Sleep detected inside async method</value>
+  </data>
+  <data name="RS1001_MessageFormat" xml:space="preserve">
+    <value>Hold on! Thread.Sleep() is blocking a real thread inside an async method. Under load, this starves the thread pool. Swap it for 'await Task.Delay()' — your app will thank you.</value>
+  </data>
+  <data name="RS1001_Description" xml:space="preserve">
+    <value>Thread.Sleep blocks the calling thread completely, preventing it from doing any other work. Inside an async method, this defeats the purpose of async/await and can cause thread pool starvation under high load. Replace it with 'await Task.Delay()' to keep your app healthy and scalable.</value>
+  </data>
+
+  <!-- RS1002 - Task.WhenAll without explicit throttling -->
+  <data name="RS1002_Title" xml:space="preserve">
+    <value>Task.WhenAll fan-out may be unbounded</value>
+  </data>
+  <data name="RS1002_MessageFormat" xml:space="preserve">
+    <value>Heads up! Task.WhenAll is processing a Select() projection without an explicit limit. Under heavy input, this can flood dependencies. Consider bounding concurrency (for example: Take(...), chunking, or SemaphoreSlim).</value>
+  </data>
+  <data name="RS1002_Description" xml:space="preserve">
+    <value>Task.WhenAll over an unbounded Select projection can trigger too many concurrent operations at once, causing connection pressure, timeouts, or cascading failures. Add an explicit concurrency boundary before fan-out.</value>
+  </data>
+
+  <!-- RS1003 - Parallel.ForEach without MaxDegreeOfParallelism -->
+  <data name="RS1003_Title" xml:space="preserve">
+    <value>Parallel.ForEach may run without an explicit concurrency limit</value>
+  </data>
+  <data name="RS1003_MessageFormat" xml:space="preserve">
+    <value>Careful! Parallel.ForEach is running without ParallelOptions/MaxDegreeOfParallelism. On shared resources, this can create saturation spikes. Consider defining an explicit limit.</value>
+  </data>
+  <data name="RS1003_Description" xml:space="preserve">
+    <value>Using Parallel.ForEach without an explicit MaxDegreeOfParallelism may oversubscribe CPU, connection pools, or downstream services. Set a bounded degree to keep load predictable.</value>
+  </data>
+
+  <!-- RS1004 - Blocking with Task.Wait / Task.Result -->
+  <data name="RS1004_Title" xml:space="preserve">
+    <value>Blocking async flow with Task.Wait/Result</value>
+  </data>
+  <data name="RS1004_MessageFormat" xml:space="preserve">
+    <value>Yikes! Blocking on Task via .Wait() or .Result can starve threads and increase deadlock risk. Prefer 'await' to keep async flow healthy.</value>
+  </data>
+  <data name="RS1004_Description" xml:space="preserve">
+    <value>Calling Task.Wait() or reading Task.Result blocks the current thread. In async-heavy code paths, this can reduce throughput and increase deadlock/starvation risk. Use await-based flow instead.</value>
+  </data>
+
+  <!-- RS1005 - Premature ToList materialization -->
+  <data name="RS1005_Title" xml:space="preserve">
+    <value>Potentially heavy ToList() materialization</value>
+  </data>
+  <data name="RS1005_MessageFormat" xml:space="preserve">
+    <value>Heads up! This LINQ pipeline is being materialized with ToList() without an explicit Take(...) limit. On large datasets, this can increase memory pressure.</value>
+  </data>
+  <data name="RS1005_Description" xml:space="preserve">
+    <value>Materializing a LINQ pipeline with ToList() too early or without bounds can allocate large collections and increase GC pressure. Consider adding a limit or streaming strategy when possible.</value>
+  </data>
+
+  <!-- RS1006 - HttpClient instantiation per request -->
+  <data name="RS1006_Title" xml:space="preserve">
+    <value>HttpClient instantiated inside method scope</value>
+  </data>
+  <data name="RS1006_MessageFormat" xml:space="preserve">
+    <value>Heads up! Creating HttpClient inside a method can lead to socket exhaustion and slower communication under load. Prefer IHttpClientFactory or a reused instance.</value>
+  </data>
+  <data name="RS1006_Description" xml:space="preserve">
+    <value>Instantiating HttpClient per operation may create excessive socket churn and connection pressure. Reusing HttpClient or using IHttpClientFactory improves connection reuse and communication stability.</value>
+  </data>
+
+  <!-- RS1007 - HTTP call without explicit timeout policy -->
+  <data name="RS1007_Title" xml:space="preserve">
+    <value>HTTP call without explicit timeout policy</value>
+  </data>
+  <data name="RS1007_MessageFormat" xml:space="preserve">
+    <value>Heads up! This HttpClient call has no explicit timeout (Timeout property or CancellationToken). Under latency spikes, requests may hang longer than expected.</value>
+  </data>
+  <data name="RS1007_Description" xml:space="preserve">
+    <value>HTTP communication should define explicit timeout boundaries to avoid stuck calls and cascading latency. Configure HttpClient.Timeout or pass a CancellationToken with timeout control.</value>
+  </data>
+
+  <!-- RS1008 - Unbounded retry loop -->
+  <data name="RS1008_Title" xml:space="preserve">
+    <value>Retry loop without explicit max attempts</value>
+  </data>
+  <data name="RS1008_MessageFormat" xml:space="preserve">
+    <value>Careful! This retry loop appears unbounded (infinite condition without explicit exit). Under persistent failure, it may amplify load and latency.</value>
+  </data>
+  <data name="RS1008_Description" xml:space="preserve">
+    <value>Unbounded retries can create feedback loops against unstable dependencies. Define an explicit maximum number of attempts and fail fast with observability.</value>
+  </data>
+
+  <!-- RS1009 - Retry without exponential backoff -->
+  <data name="RS1009_Title" xml:space="preserve">
+    <value>Retry policy without exponential backoff</value>
+  </data>
+  <data name="RS1009_MessageFormat" xml:space="preserve">
+    <value>Heads up! Retry in HTTP path appears to use fixed delay. Without exponential backoff, repeated failures can amplify pressure on unstable dependencies.</value>
+  </data>
+  <data name="RS1009_Description" xml:space="preserve">
+    <value>Using fixed delay in retries can keep hammering a failing dependency at high frequency. Prefer exponential backoff (ideally with jitter) to smooth retry traffic.</value>
+  </data>
+
+  <!-- RS1010 - Retry without jitter -->
+  <data name="RS1010_Title" xml:space="preserve">
+    <value>Retry policy without jitter</value>
+  </data>
+  <data name="RS1010_MessageFormat" xml:space="preserve">
+    <value>Heads up! Retry appears exponential but without jitter. Multiple clients may retry in lockstep and create traffic spikes.</value>
+  </data>
+  <data name="RS1010_Description" xml:space="preserve">
+    <value>Exponential backoff without jitter can synchronize retries across instances, causing burst pressure on unstable services. Add random jitter to spread retry attempts.</value>
+  </data>
+
+</root>

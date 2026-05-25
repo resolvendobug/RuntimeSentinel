@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/RuntimeSentinel.SampleApp/RuntimeSentinel.SampleApp.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/RuntimeSentinel.Analyzers/RuntimeSentinel.Analyzers.csproj" />
+    <Project Path="src/RuntimeSentinel.CodeFixes/RuntimeSentinel.CodeFixes.csproj" />
+    <Project Path="src/RuntimeSentinel.Scoring/RuntimeSentinel.Scoring.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/RuntimeSentinel.Analyzers.Tests/RuntimeSentinel.Analyzers.Tests.csproj" />
+  </Folder>
+</Solution>
