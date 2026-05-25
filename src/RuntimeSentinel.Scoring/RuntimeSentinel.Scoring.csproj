@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>true</IsPackable>
     <PackageId>RuntimeSentinel.Scoring</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.1.3</Version>
     <Authors>RuntimeSentinel contributors</Authors>
     <Description>Operational risk scoring primitives for C# code, including weighted risk dimensions and report generation in JSON and Markdown.</Description>
     <PackageTags>dotnet;roslyn;scoring;risk;analysis;concurrency;async;memory</PackageTags>

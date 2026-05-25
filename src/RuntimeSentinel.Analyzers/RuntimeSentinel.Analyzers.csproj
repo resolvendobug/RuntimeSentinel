@@ -7,8 +7,9 @@
     <Nullable>enable</Nullable>
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsPackable>true</IsPackable>
+    <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageId>RuntimeSentinel.Analyzers</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.1.3</Version>
     <Authors>RuntimeSentinel contributors</Authors>
     <Description>Roslyn analyzers focused on operational stability, concurrency safety, async correctness, memory pressure, and resilient HTTP communication patterns.</Description>
     <PackageTags>roslyn;analyzer;dotnet;concurrency;async;resilience;http;performance;runtime</PackageTags>
@@ -50,6 +51,8 @@
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
+    <None Include="$(TargetPath)" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    <None Include="$(OutputPath)pt-BR\$(AssemblyName).resources.dll" Pack="true" PackagePath="analyzers/dotnet/cs/pt-BR" Visible="false" Condition="Exists('$(OutputPath)pt-BR\$(AssemblyName).resources.dll')" />
   </ItemGroup>
 
 </Project>
