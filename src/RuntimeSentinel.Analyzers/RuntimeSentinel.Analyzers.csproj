@@ -8,10 +8,14 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsPackable>true</IsPackable>
     <PackageId>RuntimeSentinel.Analyzers</PackageId>
-    <Version>0.1.0</Version>
+    <Version>0.1.1</Version>
     <Authors>RuntimeSentinel contributors</Authors>
     <Description>Roslyn analyzers focused on operational stability, concurrency safety, async correctness, memory pressure, and resilient HTTP communication patterns.</Description>
     <PackageTags>roslyn;analyzer;dotnet;concurrency;async;resilience;http;performance;runtime</PackageTags>
+    <RepositoryUrl>https://github.com/resolvendobug/RuntimeSentinel</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryBranch>main</RepositoryBranch>
+    <PackageIcon>icon.png</PackageIcon>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
@@ -45,6 +49,7 @@
 
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
 </Project>

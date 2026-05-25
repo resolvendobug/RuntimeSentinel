@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">RuntimeSentinel</title>
+  <desc id="desc">Shield-like badge with a pulse line representing runtime stability monitoring.</desc>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="56" fill="url(#g)" />
+  <path d="M128 40 196 64v56c0 44-28 83-68 96-40-13-68-52-68-96V64l68-24Z" fill="#e2e8f0" opacity="0.14" />
+  <path d="M128 56 184 76v42c0 36-22 68-56 79-34-11-56-43-56-79V76l56-20Z" fill="#0f172a" opacity="0.28" />
+  <path d="M66 132h34l14-20 18 44 16-28h42" fill="none" stroke="#f8fafc" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="66" cy="132" r="8" fill="#f59e0b" />
+  <circle cx="190" cy="128" r="8" fill="#f59e0b" />
+  <circle cx="128" cy="156" r="8" fill="#f59e0b" />
+</svg>
