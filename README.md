@@ -173,6 +173,50 @@ Contributions are welcome!
 
 If you have a production scenario that led to an incident and would make a good new rule, that context is especially valuable.
 
+## FAQ
+
+**How do I suppress a specific warning?**
+
+Inline suppression:
+```csharp
+#pragma warning disable RS1011
+public static async void FireAndForget() { ... }
+#pragma warning restore RS1011
+```
+Project-wide suppression in your `.csproj`:
+```xml
+<PropertyGroup>
+  <NoWarn>RS1011</NoWarn>
+</PropertyGroup>
+```
+
+**Can I configure thresholds (e.g. RS1002 concurrency limit)?**
+
+Yes, via `.editorconfig`:
+```ini
+[*.cs]
+dotnet_diagnostic.RS1002.max_concurrent_tasks = 50
+dotnet_diagnostic.RS1005.max_materialized_items = 200
+```
+
+**Does it work with .NET Framework projects?**
+
+Yes. The analyzer targets `netstandard2.0` and is compatible with .NET Framework 4.6.1+ and all .NET Core / .NET 5+ versions.
+
+**What is `RuntimeSentinel.Scoring` for?**
+
+It aggregates all diagnostics from the analyzer and produces a single **Operational Risk Score** for the project, useful in CI pipelines to block or warn on high-risk code before deployment.
+
+**Will analyzers run in CI?**
+
+Yes. Roslyn analyzers run as part of `dotnet build`. Any warning can be escalated to an error in CI by adding to your `.csproj`:
+```xml
+<PropertyGroup>
+  <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+</PropertyGroup>
+```
+or selectively: `<WarningsAsErrors>RS1011;RS1012</WarningsAsErrors>`
+
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE).
