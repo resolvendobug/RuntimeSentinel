@@ -123,4 +123,26 @@
     <value>Backoff exponencial sem jitter pode sincronizar retries entre instâncias, gerando pressão em rajadas sobre serviços instáveis. Adicione jitter aleatório para distribuir as tentativas.</value>
   </data>
 
+  <!-- RS1011 - async void fora de event handler -->
+  <data name="RS1011_Title" xml:space="preserve">
+    <value>Método async void fora de event handler</value>
+  </data>
+  <data name="RS1011_MessageFormat" xml:space="preserve">
+    <value>O método '{0}' é declarado como async void. Exceções lançadas aqui não podem ser capturadas pelo chamador e vão encerrar o processo. Use async Task.</value>
+  </data>
+  <data name="RS1011_Description" xml:space="preserve">
+    <value>Métodos async void são seguros apenas para event handlers. Em qualquer outro contexto, exceções escapam da pilha de chamadas e propagam para o SynchronizationContext, geralmente encerrando a aplicação. Retorne async Task para que o chamador possa aguardar e tratar exceções corretamente.</value>
+  </data>
+
+  <!-- RS1012 - Concatenacao de string com += dentro de loop -->
+  <data name="RS1012_Title" xml:space="preserve">
+    <value>Concatenação de string com += dentro de loop</value>
+  </data>
+  <data name="RS1012_MessageFormat" xml:space="preserve">
+    <value>Concatenação de string com '+=' dentro de loop aloca uma nova string a cada iteração. Use StringBuilder para evitar pressão excessiva no GC.</value>
+  </data>
+  <data name="RS1012_Description" xml:space="preserve">
+    <value>Strings são imutáveis no .NET. Usar '+=' dentro de um loop cria uma nova alocação a cada iteração, aumentando a pressão de memória e podendo acionar o GC com frequência sob carga. Substitua por StringBuilder e chame ToString() uma vez após o loop.</value>
+  </data>
+
 </root>

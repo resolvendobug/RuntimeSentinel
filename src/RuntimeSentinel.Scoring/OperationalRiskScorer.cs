@@ -120,9 +120,19 @@ public sealed class OperationalRiskScorer
             notes.Add("Detected blocking async flow via .Wait/.Result (RS1004).");
         }
 
+        if (diagnostics.Any(d => d.Id == AvoidAsyncVoidAnalyzer.DiagnosticId))
+        {
+            notes.Add("Detected async void method(s) outside event handlers (RS1011). Exceptions will escape the call stack.");
+        }
+
         if (diagnostics.Any(d => d.Id == AvoidPrematureToListMaterializationAnalyzer.DiagnosticId))
         {
             notes.Add("Detected potentially heavy ToList materialization (RS1005).");
+        }
+
+        if (diagnostics.Any(d => d.Id == AvoidStringConcatInLoopAnalyzer.DiagnosticId))
+        {
+            notes.Add("Detected string concatenation with += inside a loop (RS1012). Each iteration allocates a new string, increasing GC pressure.");
         }
 
         if (diagnostics.Length == 0)

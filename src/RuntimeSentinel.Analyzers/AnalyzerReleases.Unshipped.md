@@ -11,3 +11,5 @@ RS1007 | Communication | Warning | Detect HttpClient calls without explicit time
 RS1008 | Communication | Warning | Detect unbounded retry loops in HTTP communication paths
 RS1009 | Communication | Warning | Detect retry loops in HTTP paths using fixed delay without exponential backoff
 RS1010 | Communication | Warning | Detect retry loops with exponential backoff but without jitter
+RS1011 | Async | Warning | Detect async void methods outside event handler context
+RS1012 | Memory | Warning | Detect string concatenation with += inside loops

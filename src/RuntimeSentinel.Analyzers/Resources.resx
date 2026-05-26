@@ -123,4 +123,24 @@
     <value>Exponential backoff without jitter can synchronize retries across instances, causing burst pressure on unstable services. Add random jitter to spread retry attempts.</value>
   </data>
 
+  <!-- RS1011 - async void outside event handler -->
+  <data name="RS1011_Title" xml:space="preserve">
+    <value>async void method outside event handler</value>
+  </data>
+  <data name="RS1011_MessageFormat" xml:space="preserve">
+    <value>Method '{0}' is declared as async void. Exceptions thrown here cannot be caught by the caller and will crash the process. Use async Task instead.</value>
+  </data>
+  <data name="RS1011_Description" xml:space="preserve">
+    <value>async void methods are only safe for event handlers. In any other context, exceptions escape the call stack and propagate to the SynchronizationContext, usually terminating the application. Return async Task or async Task&lt;T&gt; instead so callers can await and handle exceptions properly.</value>
+  </data>
+  <!-- RS1012 - String concatenation with += inside a loop -->
+  <data name="RS1012_Title" xml:space="preserve">
+    <value>String concatenation with += inside a loop</value>
+  </data>
+  <data name="RS1012_MessageFormat" xml:space="preserve">
+    <value>String concatenation with '+=' inside a loop allocates a new string on every iteration. Use StringBuilder to avoid excessive GC pressure.</value>
+  </data>
+  <data name="RS1012_Description" xml:space="preserve">
+    <value>Strings are immutable in .NET. Using '+=' inside a loop creates a new string allocation on every iteration, which increases memory pressure and can trigger frequent GC collections under load. Replace with StringBuilder and call ToString() once after the loop.</value>
+  </data>
 </root>

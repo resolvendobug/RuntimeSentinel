@@ -6,7 +6,7 @@
   <a href="https://www.nuget.org/packages/RuntimeSentinel.Analyzers"><img src="https://img.shields.io/nuget/v/RuntimeSentinel.Analyzers?label=NuGet&color=004880&logo=nuget" alt="NuGet" /></a>
   <img src="https://img.shields.io/badge/.NET-netstandard2.0+-512BD4?logo=dotnet" alt=".NET" />
   <img src="https://img.shields.io/badge/licença-MIT-green" alt="Licença" />
-  <img src="https://img.shields.io/badge/testes-36%20passando-brightgreen" alt="Testes" />
+  <img src="https://img.shields.io/badge/testes-49%20passando-brightgreen" alt="Testes" />
 </p>
 
 <p align="center">
@@ -46,6 +46,8 @@ O RuntimeSentinel antecipa essa detecção tornando riscos de alto impacto em te
 | RS1008 | Communication | Loop de retry sem limite máximo de tentativas | Retries infinitos amplificam carga sobre dependência já falhando |
 | RS1009 | Communication | Retry com atraso fixo em vez de backoff exponencial | Intervalo fixo mantém requisições intensas sobre dependência instável |
 | RS1010 | Communication | Backoff exponencial sem jitter | Retries sincronizados entre instâncias geram rajadas coordenadas |
+| RS1011 | Async | Método `async void` fora de event handler | Exceções escapam da pilha de chamadas e encerram o processo; o chamador não pode aguardar nem tratar |
+| RS1012 | Memory | `string +=` dentro de loop | Cada iteração aloca uma nova string na heap; use `StringBuilder` para evitar pressão no GC |
 
 ## Code Fix — RS1002
 

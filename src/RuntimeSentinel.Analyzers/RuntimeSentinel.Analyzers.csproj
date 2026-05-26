@@ -9,7 +9,7 @@
     <IsPackable>true</IsPackable>
     <IncludeBuildOutput>false</IncludeBuildOutput>
     <PackageId>RuntimeSentinel.Analyzers</PackageId>
-    <Version>0.1.3</Version>
+    <Version>0.1.4</Version>
     <Authors>RuntimeSentinel contributors</Authors>
     <Description>Roslyn analyzers focused on operational stability, concurrency safety, async correctness, memory pressure, and resilient HTTP communication patterns.</Description>
     <PackageTags>roslyn;analyzer;dotnet;concurrency;async;resilience;http;performance;runtime</PackageTags>

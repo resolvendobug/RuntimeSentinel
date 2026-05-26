@@ -188,4 +188,35 @@ internal static class Resources
     internal static string RS1010_Description
         => ResourceManager.GetString(nameof(RS1010_Description), Culture)
            ?? "Exponential backoff without jitter can synchronize retries across instances.";
+
+    // RS1011 - async void fora de event handler
+    // -------------------------------------------------------------------------
+
+    internal static string RS1011_Title
+        => ResourceManager.GetString(nameof(RS1011_Title), Culture)
+           ?? "async void method outside event handler";
+
+    internal static string RS1011_MessageFormat
+        => ResourceManager.GetString(nameof(RS1011_MessageFormat), Culture)
+           ?? "Method '{0}' is declared as async void. Exceptions thrown here cannot be caught by the caller and will crash the process. Use async Task instead.";
+
+    internal static string RS1011_Description
+        => ResourceManager.GetString(nameof(RS1011_Description), Culture)
+           ?? "async void methods are only safe for event handlers. In any other context, exceptions escape the call stack. Return async Task instead.";
+
+    // RS1012 - String concatenation in loop
+    // -------------------------------------------------------------------------
+
+    internal static string RS1012_Title
+        => ResourceManager.GetString(nameof(RS1012_Title), Culture)
+           ?? "String concatenation with += inside a loop";
+
+    internal static string RS1012_MessageFormat
+        => ResourceManager.GetString(nameof(RS1012_MessageFormat), Culture)
+           ?? "String concatenation with '+=' inside a loop allocates a new string on every iteration. Use StringBuilder to avoid excessive GC pressure.";
+
+    internal static string RS1012_Description
+        => ResourceManager.GetString(nameof(RS1012_Description), Culture)
+           ?? "Strings are immutable in .NET. Using '+=' inside a loop creates a new allocation on every iteration. Replace with StringBuilder.";
 }
+

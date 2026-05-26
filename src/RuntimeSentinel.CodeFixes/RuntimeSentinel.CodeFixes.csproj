@@ -8,7 +8,7 @@
     <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
     <IsPackable>true</IsPackable>
     <PackageId>RuntimeSentinel.CodeFixes</PackageId>
-    <Version>0.1.3</Version>
+    <Version>0.1.4</Version>
     <Authors>RuntimeSentinel contributors</Authors>
     <Description>Code fixes for RuntimeSentinel analyzer diagnostics, including bounded fan-out and safer concurrency patterns.</Description>
     <PackageTags>roslyn;codefix;dotnet;analyzer;concurrency;refactoring</PackageTags>
