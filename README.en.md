@@ -1,33 +1,36 @@
-# RuntimeSentinel
+<p align="center">
+  <img src="img/banner_Image.png" alt="RuntimeSentinel banner" />
+</p>
 
-![.NET](https://img.shields.io/badge/.NET-netstandard2.0+-512BD4?logo=dotnet)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Tests](https://img.shields.io/badge/tests-36%20passing-brightgreen)
+<p align="center">
+  <a href="https://www.nuget.org/packages/RuntimeSentinel.Analyzers"><img src="https://img.shields.io/nuget/v/RuntimeSentinel.Analyzers?label=NuGet&color=004880&logo=nuget" alt="NuGet" /></a>
+  <img src="https://img.shields.io/badge/.NET-netstandard2.0+-512BD4?logo=dotnet" alt=".NET" />
+  <img src="https://img.shields.io/badge/license-MIT-green" alt="License" />
+  <img src="https://img.shields.io/badge/tests-36%20passing-brightgreen" alt="Tests" />
+</p>
 
-Portuguese (Brazil) version: [README.pt-BR.md](README.pt-BR.md)
+<p align="center">
+  <strong>Roslyn analyzer toolkit for .NET operational stability.</strong><br/>
+  Detect concurrency, async, memory, and HTTP risks at compile time — before they reach production.
+</p>
 
-RuntimeSentinel is an open source Roslyn analyzer toolkit focused on **operational stability** for .NET applications.
+<p align="center">
+  🇧🇷 <a href="README.pt-BR.md">Versão em Português</a>
+</p>
 
-It was created to answer practical production questions **early in development**, such as:
+---
 
-- Can this code saturate dependencies under high load?
-- Can this async flow block threads and reduce throughput?
-- Can this pattern increase memory pressure and GC churn?
-- Can retry logic amplify failures instead of containing them?
-
-## Why This Library Exists
+## Why RuntimeSentinel
 
 Most static analyzers focus on style and correctness. Operational risks — concurrency issues, retry storms, memory pressure under load — typically surface late in the cycle: during load tests or production incidents.
 
-RuntimeSentinel shifts that detection earlier by making high-impact runtime risks visible **at compile time**, in your IDE and in CI pipelines.
+RuntimeSentinel shifts that detection earlier by making high-impact runtime risks visible **at compile time**, in your IDE and in CI pipelines. No extra tooling, no runtime overhead — just warnings where you write code.
 
-Focused on:
-
-- Stability under load
-- Safe concurrency
-- Predictable throughput
-- Memory efficiency
-- Resilient communication patterns
+| | |
+|---|---|
+| ⚡ Stability under load | 🔒 Safe concurrency |
+| 📡 Resilient HTTP patterns | 🧠 Memory efficiency |
+| ⏱ Predictable throughput | 🔁 Retry safety |
 
 ## Implemented Rules
 
@@ -102,20 +105,27 @@ Weights and thresholds are configurable via `OperationalRiskScoringOptions`.
 
 ## Quick Start
 
-1. Clone and build:
+**Install via NuGet (recommended):**
 
 ```bash
-git clone https://github.com/your-org/RuntimeSentinel
-dotnet build RuntimeSentinel.slnx
+dotnet add package RuntimeSentinel.Analyzers
 ```
 
-2. Run all tests:
+Or add directly to your `.csproj`:
+
+```xml
+<PackageReference Include="RuntimeSentinel.Analyzers" Version="0.1.3" />
+```
+
+Warnings appear automatically in Visual Studio, VS Code (C# Dev Kit), Rider, and CI pipelines.
+
+**Build from source:**
 
 ```bash
+git clone https://github.com/resolvendobug/RuntimeSentinel
+dotnet build RuntimeSentinel.slnx
 dotnet test test/RuntimeSentinel.Analyzers.Tests/RuntimeSentinel.Analyzers.Tests.csproj
 ```
-
-3. Reference the NuGet package in your project (once published).
 
 ## Compatibility
 
@@ -138,17 +148,28 @@ samples/
 
 ## Scope
 
-RuntimeSentinel is focused on analyzers and operational risk scoring primitives for C#/.NET codebases.
+RuntimeSentinel is purpose-built for operational stability analysis in C#/.NET — not a general-purpose linter.
+
+In scope:
+- Roslyn diagnostic analyzers (RS1001–RS1010)
+- Automatic code fixes for selected rules
+- Operational risk scoring engine with JSON and Markdown output
 
 Out of scope for v1:
-
 - Generic style or naming convention linting
 - Replacing load tests or runtime monitoring
 - Full observability platform features
 
 ## Contributing
 
-Contributions are welcome. Please open an issue before submitting a pull request to discuss the proposed change.
+Contributions are welcome!
+
+1. Open an issue to discuss the proposed change
+2. Fork the repository and create a feature branch
+3. Add tests for new analyzers or fixes
+4. Submit a pull request referencing the issue
+
+If you have a production scenario that led to an incident and would make a good new rule, that context is especially valuable.
 
 ## License
 
